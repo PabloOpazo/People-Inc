@@ -2,6 +2,7 @@ package Modelo;
 
 public class Employee {
     
+    private int id;
     private String nombre_completo; 
     private String departamento;
     private String fecha_contratacion;
@@ -11,13 +12,22 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee( String nombre_completo, String departamento, String fecha_contratacion, double sueldo_mensual, String posicion) {
+    public Employee(int id, String nombre_completo, String departamento, String fecha_contratacion, double sueldo_mensual, String posicion) {
         
+        this.setId(id);
         this.setNombre_completo(nombre_completo);
         this.setDepartamento(departamento);
         this.setFecha_contratacion(fecha_contratacion);
         this.setSueldo_mensual(sueldo_mensual);
         this.setPosicion(posicion);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre_completo() {

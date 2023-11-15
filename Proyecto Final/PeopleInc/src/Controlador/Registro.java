@@ -20,6 +20,8 @@ public class Registro {
             insertar.execute();
             insertar.close();
             connection.close();
+            
+            System.out.println("Empleado agregado exitosamente.");
             return true;
             
         }catch(SQLException s){
@@ -28,6 +30,29 @@ public class Registro {
             
         }catch(Exception e){
             System.out.println("Error al agregar usuario "+e.getMessage());
+            return false;
+        }
+    }
+    
+    public static boolean eliminarEmployee(Employee dto){
+        try{
+            Connection connection = Conexion.open();
+            String query = "DELETE FROM employee WHERE employee.id = 1";
+            PreparedStatement eliminar = connection.prepareStatement(query);
+            
+            eliminar.execute();
+            eliminar.close();
+            connection.close();
+            
+            
+            return true;
+            
+        }catch(SQLException s){
+            System.out.println("Error SQL al rliminar usuario "+s.getMessage());
+            return false;
+            
+        }catch(Exception e){
+            System.out.println("Error al eliminar usuario "+e.getMessage());
             return false;
         }
     }

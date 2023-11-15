@@ -30,11 +30,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         bt_salir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         mb_BarraPrincipal = new javax.swing.JMenuBar();
-        mo_crear = new javax.swing.JMenu();
+        mo_agregar = new javax.swing.JMenu();
         mo_modificar = new javax.swing.JMenu();
         mo_eliminar = new javax.swing.JMenu();
-        mo_listar = new javax.swing.JMenu();
+        mo_actualizar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,18 +47,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        mo_crear.setText("Crear");
-        mo_crear.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        mo_agregar.setText("Agregar");
+        mo_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mo_crearMouseClicked(evt);
+                mo_agregarMouseClicked(evt);
             }
         });
-        mo_crear.addActionListener(new java.awt.event.ActionListener() {
+        mo_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mo_crearActionPerformed(evt);
+                mo_agregarActionPerformed(evt);
             }
         });
-        mb_BarraPrincipal.add(mo_crear);
+        mb_BarraPrincipal.add(mo_agregar);
 
         mo_modificar.setText("Modificar");
         mb_BarraPrincipal.add(mo_modificar);
@@ -64,8 +79,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mo_eliminar.setText("Eliminar");
         mb_BarraPrincipal.add(mo_eliminar);
 
-        mo_listar.setText("Listar");
-        mb_BarraPrincipal.add(mo_listar);
+        mo_actualizar.setText("Actualizar");
+        mb_BarraPrincipal.add(mo_actualizar);
 
         setJMenuBar(mb_BarraPrincipal);
 
@@ -73,15 +88,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(322, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bt_salir)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(bt_salir)
                 .addContainerGap())
         );
@@ -93,13 +114,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_bt_salirActionPerformed
 
-    private void mo_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mo_crearActionPerformed
+    private void mo_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mo_agregarActionPerformed
         
-    }//GEN-LAST:event_mo_crearActionPerformed
+    }//GEN-LAST:event_mo_agregarActionPerformed
 
-    private void mo_crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mo_crearMouseClicked
+    private void mo_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mo_agregarMouseClicked
         new EmployeeCrear().setVisible(true); 
-    }//GEN-LAST:event_mo_crearMouseClicked
+    }//GEN-LAST:event_mo_agregarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -138,10 +159,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_salir;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JMenuBar mb_BarraPrincipal;
-    private javax.swing.JMenu mo_crear;
+    private javax.swing.JMenu mo_actualizar;
+    private javax.swing.JMenu mo_agregar;
     private javax.swing.JMenu mo_eliminar;
-    private javax.swing.JMenu mo_listar;
     private javax.swing.JMenu mo_modificar;
     // End of variables declaration//GEN-END:variables
 }
