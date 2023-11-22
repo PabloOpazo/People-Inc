@@ -4,6 +4,12 @@
  */
 package Vistas;
 
+import Controlador.Registro;
+import Modelo.Employee;
+//import Modelo.Variables;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author CETECOM
@@ -18,6 +24,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("People Inc.");
+
+        actualizarTablaUsuarios();
     }
 
     /**
@@ -32,10 +40,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         bt_salir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        bt_borrar = new javax.swing.JButton();
+        txt_borrar = new javax.swing.JTextField();
         mb_BarraPrincipal = new javax.swing.JMenuBar();
         mo_agregar = new javax.swing.JMenu();
         mo_modificar = new javax.swing.JMenu();
-        mo_eliminar = new javax.swing.JMenu();
         mo_actualizar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,6 +66,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        bt_borrar.setText("Borrar");
+        bt_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_borrarActionPerformed(evt);
+            }
+        });
+
+        txt_borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_borrarActionPerformed(evt);
+            }
+        });
+
         mo_agregar.setText("Agregar");
         mo_agregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -71,12 +93,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mb_BarraPrincipal.add(mo_agregar);
 
         mo_modificar.setText("Modificar");
+        mo_modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mo_modificarMouseClicked(evt);
+            }
+        });
         mb_BarraPrincipal.add(mo_modificar);
 
-        mo_eliminar.setText("Eliminar");
-        mb_BarraPrincipal.add(mo_eliminar);
-
         mo_actualizar.setText("Actualizar");
+        mo_actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mo_actualizarMouseClicked(evt);
+            }
+        });
         mb_BarraPrincipal.add(mo_actualizar);
 
         setJMenuBar(mb_BarraPrincipal);
@@ -86,20 +115,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(582, Short.MAX_VALUE)
-                .addComponent(bt_salir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(616, Short.MAX_VALUE)
+                        .addComponent(bt_salir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bt_borrar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_borrar)
+                    .addComponent(txt_borrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                 .addComponent(bt_salir)
                 .addContainerGap())
         );
@@ -109,7 +149,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void bt_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_salirActionPerformed
         System.exit(0);
-        
+
     }//GEN-LAST:event_bt_salirActionPerformed
 
     private void mo_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mo_agregarActionPerformed
@@ -117,20 +157,63 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mo_agregarActionPerformed
     public int i = 0;
     private void mo_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mo_agregarMouseClicked
-
+        
         if (i == 0) {
             new EmployeeCrear().setVisible(true);
             i = 1;
         }
         if (i == 1) {
-            System.out.println("Ya hay una ventana abierta!");
+            System.out.println("Ya hay una ventana abierta! cerrando ventana...");
+            i = 0;
+            new EmployeeCrear().setVisible(false);
         }
 
     }//GEN-LAST:event_mo_agregarMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void mo_actualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mo_actualizarMouseClicked
+        actualizarTablaUsuarios();
+    }//GEN-LAST:event_mo_actualizarMouseClicked
+
+    private void txt_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_borrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_borrarActionPerformed
+
+    private void bt_borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_borrarActionPerformed
+        Registro.eliminarEmployee(Integer.parseInt(this.txt_borrar.getText()));
+        this.txt_borrar.setText("");
+        JOptionPane.showMessageDialog(null, "Usuario borrado");
+        actualizarTablaUsuarios();
+    }//GEN-LAST:event_bt_borrarActionPerformed
+
+    private void mo_modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mo_modificarMouseClicked
+        new EmployeeModificar().setVisible(true);
+    }//GEN-LAST:event_mo_modificarMouseClicked
+
+    private void actualizarTablaUsuarios() {
+        ArrayList<Employee> lista = Registro.mostrarTodos();
+        String matriz[][] = new String[lista.size()][6];
+        // traspasando los valores desde el registro de  mascotas al String en memoria
+        for (int i = 0; i < lista.size(); i++) {
+            matriz[i][0] = lista.get(i).getId() + "";
+            matriz[i][1] = lista.get(i).getNombre_completo();
+            matriz[i][2] = lista.get(i).getDepartamento();
+            matriz[i][3] = lista.get(i).getFecha_contratacion() + "";
+            matriz[i][4] = "$" + lista.get(i).getSueldo_mensual() + "";
+            matriz[i][5] = lista.get(i).getPosicion();
+        }
+        // asigna JTable con el encabezado (id, nombre, la especie
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                matriz,
+                new String[]{
+                    "ID", "NOMBRE COMPLETO", "DEPARTAMENTO", "FECHA DE CONTRATACIÓN", "SUELDO MENSUAL", "POSICIÓN"
+                }
+        ));
+    }
+                
+        /**
+         * @param args the command line arguments
+         */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -164,13 +247,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_borrar;
     private javax.swing.JButton bt_salir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuBar mb_BarraPrincipal;
     private javax.swing.JMenu mo_actualizar;
     private javax.swing.JMenu mo_agregar;
-    private javax.swing.JMenu mo_eliminar;
     private javax.swing.JMenu mo_modificar;
+    private javax.swing.JTextField txt_borrar;
     // End of variables declaration//GEN-END:variables
 }

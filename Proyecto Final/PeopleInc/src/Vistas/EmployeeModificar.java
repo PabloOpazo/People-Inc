@@ -3,22 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vistas;
-import Modelo.Employee;
+
 import Controlador.Registro;
+import Modelo.Employee;
 import java.awt.Color;
-//import Vistas.MenuPrincipal;
+import javax.swing.JOptionPane;
 
-public class EmployeeCrear extends javax.swing.JFrame {
-
+/**
+ *
+ * @author CETECOM
+ */
+public class EmployeeModificar extends javax.swing.JFrame {
 
     /**
-     * Creates new form CrearEmployee
+     * Creates new form EmployeeListar
      */
-    public EmployeeCrear() {
+    public EmployeeModificar() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
-        //setUndecorated(true);
     }
 
     /**
@@ -30,8 +33,8 @@ public class EmployeeCrear extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bt_agregar = new javax.swing.JButton();
-        bt_salir = new javax.swing.JButton();
+        txt_id = new javax.swing.JTextField();
+        bt_buscar_id = new javax.swing.JButton();
         txt_nombre_completo = new javax.swing.JTextField();
         lb_nombre_completo = new javax.swing.JLabel();
         txt_departamento = new javax.swing.JTextField();
@@ -42,23 +45,19 @@ public class EmployeeCrear extends javax.swing.JFrame {
         sp_sueldo_mensual = new javax.swing.JSpinner();
         txt_posicion = new javax.swing.JTextField();
         lb_posicion = new javax.swing.JLabel();
-        lb_agregar_empleado = new javax.swing.JLabel();
-        bt_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bt_agregar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        bt_agregar.setText("Agregar");
-        bt_agregar.addActionListener(new java.awt.event.ActionListener() {
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_agregarActionPerformed(evt);
+                txt_idActionPerformed(evt);
             }
         });
 
-        bt_salir.setText("Salir");
-        bt_salir.addActionListener(new java.awt.event.ActionListener() {
+        bt_buscar_id.setText("Buscar ID");
+        bt_buscar_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_salirActionPerformed(evt);
+                bt_buscar_idActionPerformed(evt);
             }
         });
 
@@ -103,31 +102,14 @@ public class EmployeeCrear extends javax.swing.JFrame {
 
         lb_posicion.setText("Posición:");
 
-        lb_agregar_empleado.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lb_agregar_empleado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_agregar_empleado.setText("Agregar empleado");
-
-        bt_limpiar.setText("Limpiar");
-        bt_limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_limpiarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_agregar_empleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bt_limpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bt_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lb_nombre_completo)
                             .addComponent(lb_departamento)
@@ -140,20 +122,22 @@ public class EmployeeCrear extends javax.swing.JFrame {
                             .addComponent(ftxt_fecha_contratacion)
                             .addComponent(txt_departamento)
                             .addComponent(txt_nombre_completo)
-                            .addComponent(sp_sueldo_mensual, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 36, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addComponent(bt_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(sp_sueldo_mensual, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bt_buscar_id)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb_agregar_empleado)
-                .addGap(27, 27, 27)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_buscar_id))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_nombre_completo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_nombre_completo))
@@ -173,71 +157,50 @@ public class EmployeeCrear extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_posicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_posicion))
-                .addGap(18, 18, 18)
-                .addComponent(bt_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt_salir)
-                    .addComponent(bt_limpiar))
-                .addContainerGap())
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarAgregar() {
-        txt_nombre_completo.setText("");
-        txt_departamento.setText("");
-        ftxt_fecha_contratacion.setText("YYYY-MM-DD"); ftxt_fecha_contratacion.setForeground(Color.LIGHT_GRAY);
-        sp_sueldo_mensual.setValue(0);
-        txt_posicion.setText("");
-        
-    }
-    private void bt_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarActionPerformed
-
-        Employee emp = new Employee();
-        emp.setNombre_completo(txt_nombre_completo.getText());
-        emp.setDepartamento(txt_departamento.getText());
-        emp.setFecha_contratacion(ftxt_fecha_contratacion.getText());
-        emp.setSueldo_mensual(Double.valueOf((int) sp_sueldo_mensual.getValue()));
-        emp.setPosicion(txt_posicion.getText());
-        
-        Registro.agregarEmployee(emp);
-        
-        //limpiarAgregar();
-        
-    }//GEN-LAST:event_bt_agregarActionPerformed
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_idActionPerformed
 
     private void txt_nombre_completoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre_completoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_nombre_completoActionPerformed
 
-    private void bt_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_salirActionPerformed
-        setVisible(false); 
-        //i = 0;
-    }//GEN-LAST:event_bt_salirActionPerformed
-
     private void txt_departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_departamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_departamentoActionPerformed
 
-    private void ftxt_fecha_contratacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxt_fecha_contratacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ftxt_fecha_contratacionActionPerformed
-    
     private void ftxt_fecha_contratacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ftxt_fecha_contratacionMouseClicked
         ftxt_fecha_contratacion.setValue("");
         ftxt_fecha_contratacion.setForeground(Color.black);
     }//GEN-LAST:event_ftxt_fecha_contratacionMouseClicked
 
-    private void bt_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_limpiarActionPerformed
-        limpiarAgregar();
-    }//GEN-LAST:event_bt_limpiarActionPerformed
+    private void ftxt_fecha_contratacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxt_fecha_contratacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftxt_fecha_contratacionActionPerformed
 
     private void sp_sueldo_mensualStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sp_sueldo_mensualStateChanged
         //validar numeros negativos
-        
+
     }//GEN-LAST:event_sp_sueldo_mensualStateChanged
+
+    private void bt_buscar_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_buscar_idActionPerformed
+        Employee usu = Registro.buscarPorUsuario(Integer.parseInt(txt_id.getText()));
+        if(usu == null) {
+            JOptionPane.showMessageDialog(null, "ID no encontrado");
+        } else {
+            this.txt_nombre_completo.setText(usu.getNombre_completo());
+            this.txt_departamento.setText(usu.getDepartamento());
+            this.ftxt_fecha_contratacion.setText(usu.getFecha_contratacion());
+            this.sp_sueldo_mensual.setValue(usu.getSueldo_mensual());
+            this.txt_posicion.setText(usu.getPosicion());
+        }
+    }//GEN-LAST:event_bt_buscar_idActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,13 +219,13 @@ public class EmployeeCrear extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmployeeCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmployeeCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmployeeCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeCrear.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EmployeeModificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -270,17 +233,14 @@ public class EmployeeCrear extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeCrear().setVisible(true);
+                new EmployeeModificar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_agregar;
-    private javax.swing.JButton bt_limpiar;
-    private javax.swing.JButton bt_salir;
+    private javax.swing.JButton bt_buscar_id;
     private javax.swing.JFormattedTextField ftxt_fecha_contratacion;
-    private javax.swing.JLabel lb_agregar_empleado;
     private javax.swing.JLabel lb_departamento;
     private javax.swing.JLabel lb_fecha_contratacion;
     private javax.swing.JLabel lb_nombre_completo;
@@ -288,6 +248,7 @@ public class EmployeeCrear extends javax.swing.JFrame {
     private javax.swing.JLabel lb_sueldo_mensual;
     private javax.swing.JSpinner sp_sueldo_mensual;
     private javax.swing.JTextField txt_departamento;
+    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_nombre_completo;
     private javax.swing.JTextField txt_posicion;
     // End of variables declaration//GEN-END:variables

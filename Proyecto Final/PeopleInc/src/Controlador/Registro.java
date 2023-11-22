@@ -3,7 +3,7 @@ package Controlador;
 import db.Conexion;
 import Modelo.Employee;
 import java.sql.*;
-import Vistas.*;
+import java.util.ArrayList;
 
 public class Registro {
 
@@ -35,51 +35,74 @@ public class Registro {
         }
     }
 
-    public static boolean Consulta(Employee dto) {
-        try {
-            Connection connection = Conexion.open();
-            String query = "SELECT id, nombre_completo, departamento, fecha_contratacion, sueldo_mensual, posicion FROM employee";
-            PreparedStatement select = connection.prepareStatement(query);
-            
-            
-            select.execute();
-            select.close();
-            connection.close();
-            
-
-
-            return true;
-
-        } catch (SQLException s) {
-            System.out.println(s.getMessage());
-            return false;
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
+    public static ArrayList<Employee> mostrarTodos() {
+        ArrayList<Employee> listaEmpleados = new ArrayList<Employee>();
+        try{
+            Connection conexion = Conexion.open();
+            String query = "SELECT * FROM employee";
+            PreparedStatement listarTodos = conexion.prepareStatement(query);
+            ResultSet rs = listarTodos.executeQuery();
+            while(rs.next()){
+                Employee dto = new Employee();
+                dto.setId(rs.getInt("id"));
+                dto.setNombre_completo(rs.getString("nombre_completo"));
+                dto.setDepartamento(rs.getString("departamento"));
+                dto.setFecha_contratacion(rs.getString("fecha_contratacion"));
+                dto.setSueldo_mensual(rs.getInt("sueldo_mensual"));
+                dto.setPosicion(rs.getString("posicion"));
+                listaEmpleados.add(dto);
+            }
+        }catch(SQLException s){
+            System.out.println("Error SQL al listar usuario: "+s.getMessage());
+        }catch(Exception e){
+            System.out.println("Error al listar usuario: "+e.getMessage());
         }
+        return listaEmpleados;
     }
-
-    public static boolean eliminarEmployee(Employee dto) {
-        try {
-            Connection connection = Conexion.open();
-            String query = "DELETE FROM employee WHERE employee.id = 1";
-            PreparedStatement eliminar = connection.prepareStatement(query);
-
+    
+    public static void eliminarEmployee(int idEliminar){
+        try{
+            Connection conexion = Conexion.open();
+            String query = "DELETE FROM employee WHERE id=?";
+            PreparedStatement eliminar = conexion.prepareStatement(query);
+            eliminar.setInt(1, idEliminar);
             eliminar.execute();
             eliminar.close();
-            connection.close();
-
-            return true;
-
-        } catch (SQLException s) {
-            System.out.println("Error SQL al rliminar usuario " + s.getMessage());
-            return false;
-
-        } catch (Exception e) {
-            System.out.println("Error al eliminar usuario " + e.getMessage());
-            return false;
+            conexion.close();
+        }catch(SQLException s){
+            System.out.println("Error SQL al eliminar usuario: " +s.getMessage());
+        }catch(Exception e){
+            System.out.println("Error al eliminar usuario: " +e.getMessage());
         }
     }
+    
+    public static Employee buscarPorUsuario(int rutBuscado){
+        ArrayList<Employee> listaUsuarios = new ArrayList<Employee>();
+        Employee usuarioBuscado = null;
+        try{
+            Connection conexion = Conexion.open();
+            String query = "SELECT id, nombre,apellido,numdepto,montoGastos,tipo FROM usuarios WHERE id=?";
+            PreparedStatement buscarPorUsuario = conexion.prepareStatement(query);
+            buscarPorUsuario.setInt(1, rutBuscado);
+            ResultSet rs = buscarPorUsuario.executeQuery();
+            while(rs.next()){
+                Employee usuEncontrado = new Employee();
+                usuEncontrado.setId(rs.getInt("id"));
+                usuEncontrado.setNombre_completo(rs.getString("nombre_completo"));
+                usuEncontrado.setDepartamento(rs.getString("departamento"));
+                usuEncontrado.setFecha_contratacion(rs.getString("fecha_contratacion"));
+                usuEncontrado.setSueldo_mensual(rs.getInt("sueldo_mensual"));
+                usuEncontrado.setPosicion(rs.getString("posicion"));
+                usuarioBuscado = usuEncontrado;
+                return usuarioBuscado;
+            }
+        }catch(SQLException s){
+            System.out.println("Error SQL al listar usuario"+s.getMessage());
+        }catch(Exception e){
+            System.out.println("Error al listar usuario"+e.getMessage());
+        }
+        return null;
+    }
+    
 
 }
